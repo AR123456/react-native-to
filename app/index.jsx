@@ -8,7 +8,7 @@ import {
   TextInput,
 } from "react-native";
 import { SafeAreaView, SafeAreaProvider } from "react-native-safe-area-context";
-
+import Ionicons from "@expo/vector-icons/Ionicons";
 // DATA will be todos for testing
 const ToDoDATA = [
   {
@@ -32,7 +32,9 @@ const Item = ({ title }) => (
       <View>
         <Text style={styles.title}>{title}</Text>
       </View>
+      <Ionicons name={"delete"} />
     </View>
+    <View style={styles.separator} />
   </View>
 );
 export default function Index() {
@@ -42,7 +44,7 @@ export default function Index() {
     <SafeAreaProvider>
       <SafeAreaView
         style={{
-          flex: 1,
+          // flex: 1,
           justifyContent: "center",
           alignItems: "center",
         }}
@@ -69,22 +71,26 @@ const styles = StyleSheet.create({
   },
   item: {
     backgroundColor: "#f9c2ff",
-    // padding: 20,
-    // marginVertical: 8,
-    // marginHorizontal: 16,
+
+    padding: 20,
+    marginVertical: 8,
+    marginHorizontal: 16,
   },
   title: {
     fontSize: 32,
   },
   input: {
     height: 40,
+    width: "90%",
     margin: 12,
     borderWidth: 1,
     padding: 10,
   },
   row: {
+    backgroundColor: "red",
     flexDirection: "row",
-    width: "100%",
+    // width: "100%",
+    width: 600,
     maxWidth: 600,
     height: 100,
     marginBottom: 10,
@@ -94,5 +100,17 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     overflow: "hidden",
     marginHorizontal: "auto",
+    paddingTop: 10,
+    paddingLeft: 10,
+    paddingRight: 5,
+  },
+
+  separator: {
+    height: 1,
+    // backgroundColor: colorScheme === "dark" ? "papayawhip" : "#000",
+    width: "50%",
+    maxWidth: 300,
+    marginHorizontal: "auto",
+    marginBottom: 10,
   },
 });
