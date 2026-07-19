@@ -24,16 +24,20 @@ const ToDoDATA = [
     title: "Third Item",
   },
 ];
-// getter setter
-const [text, onChangeText] = useState("Add a todo");
 
 // Item will be a todo item
 const Item = ({ title }) => (
   <View style={styles.item}>
-    <Text style={styles.title}>{title}</Text>
+    <View style={styles.row}>
+      <View>
+        <Text style={styles.title}>{title}</Text>
+      </View>
+    </View>
   </View>
 );
 export default function Index() {
+  // getter setter
+  const [text, onChangeText] = useState("Add a todo");
   return (
     <SafeAreaProvider>
       <SafeAreaView
@@ -44,7 +48,11 @@ export default function Index() {
         }}
       >
         <Text>ToDO List</Text>
-
+        <TextInput
+          style={styles.input}
+          onChangeText={onChangeText}
+          value={text}
+        />
         <FlatList
           data={ToDoDATA}
           renderItem={({ item }) => <Item title={item.title} />}
@@ -61,11 +69,30 @@ const styles = StyleSheet.create({
   },
   item: {
     backgroundColor: "#f9c2ff",
-    padding: 20,
-    marginVertical: 8,
-    marginHorizontal: 16,
+    // padding: 20,
+    // marginVertical: 8,
+    // marginHorizontal: 16,
   },
   title: {
     fontSize: 32,
+  },
+  input: {
+    height: 40,
+    margin: 12,
+    borderWidth: 1,
+    padding: 10,
+  },
+  row: {
+    flexDirection: "row",
+    width: "100%",
+    maxWidth: 600,
+    height: 100,
+    marginBottom: 10,
+    borderStyle: "solid",
+    // borderColor: colorScheme === 'dark' ? 'papayawhip' : '#000',
+    borderWidth: 1,
+    borderRadius: 20,
+    overflow: "hidden",
+    marginHorizontal: "auto",
   },
 });
