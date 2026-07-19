@@ -24,6 +24,9 @@ const ToDoDATA = [
     title: "Third Item",
   },
 ];
+// getter setter
+const [text, onChangeText] = useState("Add a todo");
+
 // Item will be a todo item
 const Item = ({ title }) => (
   <View style={styles.item}>
