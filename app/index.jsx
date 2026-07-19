@@ -1,5 +1,14 @@
-import { View, FlatList, StyleSheet, Text, StatusBar } from "react-native";
+import { useState } from "react";
+import {
+  View,
+  FlatList,
+  StyleSheet,
+  Text,
+  StatusBar,
+  TextInput,
+} from "react-native";
 import { SafeAreaView, SafeAreaProvider } from "react-native-safe-area-context";
+
 // DATA will be todos for testing
 const ToDoDATA = [
   {
