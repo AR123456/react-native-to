@@ -33,7 +33,7 @@ const Item = ({ title }) => (
         {title}
       </Text>
       <View style={styles.actions}>
-        <Ionicons name="pencil-outline" size={22} color="#555" />
+        <Ionicons name="pencil" size={24} color="#555" />
         <Ionicons name="trash-outline" size={22} color="#555" />
       </View>
     </View>
