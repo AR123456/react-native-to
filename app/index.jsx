@@ -17,7 +17,8 @@ const ToDoDATA = [
   },
   {
     id: "3ac68afc-c605-48d3-a4f8-fbd91aa97f63",
-    title: "Second Item",
+    title:
+      "Second Item this is a really long to do it may take up more than one line",
   },
   {
     id: "58694a0f-3da1-471f-bd96-145571e29d72",
@@ -29,9 +30,7 @@ const ToDoDATA = [
 const Item = ({ title }) => (
   <View style={styles.item}>
     <View style={styles.row}>
-      <Text style={styles.title} numberOfLines={1}>
-        {title}
-      </Text>
+      <Text style={styles.title}>{title}</Text>
       <View style={styles.actions}>
         <Ionicons name="pencil" size={24} color="#555" />
         <Ionicons name="trash-outline" size={22} color="#555" />
@@ -65,7 +64,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     marginTop: StatusBar.currentHeight || 0,
-    // alignItems: "center",
   },
   header: {
     fontSize: 20,
@@ -93,7 +91,7 @@ const styles = StyleSheet.create({
   },
   row: {
     flexDirection: "row",
-    alignItems: "center",
+    alignItems: "flex-start",
     justifyContent: "space-between",
     borderWidth: 1,
     borderRadius: 20,
