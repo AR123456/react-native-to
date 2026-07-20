@@ -32,7 +32,10 @@ const Item = ({ title }) => (
       <Text style={styles.title} numberOfLines={1}>
         {title}
       </Text>
-      <Ionicons name="trash-outline" size={24} color="black" />
+      <View style={styles.actions}>
+        <Ionicons name="pencil-outline" size={22} color="#555" />
+        <Ionicons name="trash-outline" size={22} color="#555" />
+      </View>
     </View>
   </View>
 );
@@ -97,5 +100,10 @@ const styles = StyleSheet.create({
     borderColor: "#ccc",
     paddingVertical: 14,
     paddingHorizontal: 16,
+  },
+  actions: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 16,
   },
 });
