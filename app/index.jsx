@@ -62,12 +62,13 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     marginTop: StatusBar.currentHeight || 0,
-    alignItems: "center",
+    // alignItems: "center",
   },
   header: {
     fontSize: 20,
     fontWeight: "600",
     marginTop: 8,
+    alignSelf: "center",
   },
   item: {
     marginBottom: 10,
@@ -81,6 +82,7 @@ const styles = StyleSheet.create({
     margin: 12,
     borderWidth: 1,
     padding: 10,
+    alignSelf: "center",
   },
   listContent: {
     width: "100%",
