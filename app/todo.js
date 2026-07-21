@@ -3,28 +3,28 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 // asyncstorage will store meals in array with meals key
 const TODO_KEY = "todo";
-// get meals
+// get todos
 // fetch whatever's stored, If so, If nothing's(first launch), returns an empty array []
-export const getTodos = async (): Promise<Meal[]> => {
+export const getTodos = async () => {
   const data = await AsyncStorage.getItem(TODO_KEY);
   return data ? JSON.parse(data) : [];
 };
-// addmeal- create here call elsewhere
+// addtodo- create here call elsewhere
 export const addTodo = async (
-  //loads the existing meals array
-  meal: Omit<Meal, "id" | "createdAt">,
-): Promise<Meal> => {
-  const meals = await getTodos();
-  //Builds the new meal object by spreading your input and adding a generated id (current timestamp as a string) and createdAt (ISO date string)
-  const newMeal: Meal = {
-    ...meal,
-    //Saves the updated array back — notice [newMeal, ...meals] puts the new meal first, so the list stays newest-first
+  //loads the existing todo array
+  todo,
+) => {
+  const todos = await getTodos();
+  //Builds the new todo object by spreading your input and adding a generated id (current timestamp as a string) and createdAt (ISO date string)
+  const newTodo = {
+    ...todo,
+    //Saves the updated array back — notice [newTodo, ...todos] puts the new todo first, so the list stays newest-first
     id: Date.now().toString(),
     createdAt: new Date().toISOString(),
   };
-  await AsyncStorage.setItem(MEALS_KEY, JSON.stringify([newMeal, ...meals]));
-  //Returns the completed meal object so the caller can use it
-  return newMeal;
+  await AsyncStorage.setItem(TODO_KEY_KEY, JSON.stringify([newTodo, ...todos]));
+  //Returns the completed todo object so the caller can use it
+  return newTodo;
 };
 export const deleteTodo = async (id: string): Promise<void> => {
   const meals = await getTodos();
