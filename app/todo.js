@@ -26,12 +26,12 @@ export const addTodo = async (
   //Returns the completed todo object so the caller can use it
   return newTodo;
 };
-export const deleteTodo = async (id: string): Promise<void> => {
-  const meals = await getTodos();
-  const filtered = meals.filter((meal) => meal.id !== id);
+export const deleteTodo = async (id) => {
+  const todos = await getTodos();
+  const filtered = todos.filter((todo) => todo.id !== id);
   await AsyncStorage.setItem(TODO_KEY, JSON.stringify(filtered));
 };
 // clear meals set fresh each day
-export const clearAllMeals = async (): Promise<void> => {
+export const clearAllTodoss = async () => {
   await AsyncStorage.removeItem(TODO_KEY);
 };
