@@ -22,10 +22,18 @@ export const addTodo = async (
     id: Date.now().toString(),
     createdAt: new Date().toISOString(),
   };
-  await AsyncStorage.setItem(TODO_KEY_KEY, JSON.stringify([newTodo, ...todos]));
+  await AsyncStorage.setItem(TODO_KEY, JSON.stringify([newTodo, ...todos]));
   //Returns the completed todo object so the caller can use it
   return newTodo;
 };
+
+export const editTodo = async () => {
+  // load existing todo array
+  //find todo being edited by id , make update
+  // save update back to array
+  // return updated todos
+};
+
 export const deleteTodo = async (id) => {
   const todos = await getTodos();
   const filtered = todos.filter((todo) => todo.id !== id);
