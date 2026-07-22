@@ -1,4 +1,4 @@
-//  use local storage for todos
+//  use local storage for todos -import
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 // asyncstorage will store meals in array with meals key
@@ -27,11 +27,17 @@ export const addTodo = async (
   return newTodo;
 };
 
-export const editTodo = async () => {
-  // load existing todo array
-  //find todo being edited by id , make update
-  // save update back to array
-  // return updated todos
+export const editTodo = async (id, updates) => {
+  //loads the existing todo array
+  const todos = await getTodos();
+  //finds the todo and merges in the updates, leaving everything else untouched
+  const updatedTodos = todos.map((todo) =>
+    todo.id === id ? { ...todo, ...updates } : todo,
+  );
+  //saves the updated array back
+  await AsyncStorage.setItem(TODO_KEY, JSON.stringify(updatedTodos));
+  //returns the updated todo so the caller can use it
+  return updatedTodos.find((todo) => todo.id === id);
 };
 
 export const deleteTodo = async (id) => {
@@ -40,6 +46,6 @@ export const deleteTodo = async (id) => {
   await AsyncStorage.setItem(TODO_KEY, JSON.stringify(filtered));
 };
 // clear meals set fresh each day
-export const clearAllTodoss = async () => {
+export const clearAllTodos = async () => {
   await AsyncStorage.removeItem(TODO_KEY);
 };
