@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   View,
   FlatList,
@@ -9,22 +9,7 @@ import {
 } from "react-native";
 import { SafeAreaView, SafeAreaProvider } from "react-native-safe-area-context";
 import Ionicons from "@expo/vector-icons/Ionicons";
-// DATA will be todos for testing
-const ToDoDATA = [
-  {
-    id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
-    title: "First Item",
-  },
-  {
-    id: "3ac68afc-c605-48d3-a4f8-fbd91aa97f63",
-    title:
-      "Second Item this is a really long to do it may take up more than one line",
-  },
-  {
-    id: "58694a0f-3da1-471f-bd96-145571e29d72",
-    title: "Third Item",
-  },
-];
+import { getTodos } from "./todo";
 
 // Item will be a todo item
 const Item = ({ title }) => (
@@ -39,8 +24,18 @@ const Item = ({ title }) => (
   </View>
 );
 export default function Index() {
-  // getter setter
+  // getters setters
+  const [todos, setTodos] = useState([]);
+
   const [text, onChangeText] = useState("Add a todo");
+
+  const loadTodos = async () => {
+    const data = await getTodos();
+    setTodos(data);
+  };
+  useEffect(() => {
+    loadTodos();
+  }, []);
   return (
     <SafeAreaProvider>
       <SafeAreaView style={styles.container}>
@@ -51,7 +46,7 @@ export default function Index() {
           value={text}
         />
         <FlatList
-          data={ToDoDATA}
+          data={todos}
           renderItem={({ item }) => <Item title={item.title} />}
           keyExtractor={(item) => item.id}
           contentContainerStyle={styles.listContent}

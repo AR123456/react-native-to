@@ -7,7 +7,7 @@ const TODO_KEY = "todo";
 const DEFAULT_TODOS = [
   {
     id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
-    title: "First Item",
+    title: "First Item, coming from default todos",
   },
   {
     id: "3ac68afc-c605-48d3-a4f8-fbd91aa97f63",
@@ -21,7 +21,7 @@ const DEFAULT_TODOS = [
 ];
 
 // get todos
-// fetch whatever's stored, If so, If nothing's(first launch), returns an empty array []
+// fetch whatever's stored, If so, If nothing's(first launch), returns default values array
 export const getTodos = async () => {
   const data = await AsyncStorage.getItem(TODO_KEY);
   return data ? JSON.parse(data) : DEFAULT_TODOS;
