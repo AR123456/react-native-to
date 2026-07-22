@@ -7,7 +7,7 @@ const TODO_KEY = "todo";
 const DEFAULT_TODOS = [
   {
     id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
-    title: "First Item, coming from default todos",
+    title: "First Item",
   },
   {
     id: "3ac68afc-c605-48d3-a4f8-fbd91aa97f63",
