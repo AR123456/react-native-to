@@ -1,104 +1,80 @@
-import { useState, useEffect } from "react";
 import {
   View,
-  FlatList,
-  StyleSheet,
   Text,
-  StatusBar,
-  TextInput,
+  StyleSheet,
+  ImageBackground,
+  Pressable,
 } from "react-native";
-import { SafeAreaView, SafeAreaProvider } from "react-native-safe-area-context";
-import Ionicons from "@expo/vector-icons/Ionicons";
-import { getTodos } from "./todo";
+import { Link } from "expo-router";
 
-// Item will be a todo item
-const Item = ({ title }) => (
-  <View style={styles.item}>
-    <View style={styles.row}>
-      <Text style={styles.title}>{title}</Text>
-      <View style={styles.actions}>
-        <Ionicons name="pencil" size={24} color="#555" />
-        <Ionicons name="trash-outline" size={22} color="#555" />
-      </View>
-    </View>
-  </View>
-);
-export default function Index() {
-  // getters setters
-  const [todos, setTodos] = useState([]);
+import icedCoffeeImg from "@/assets/images/iced-coffee.png";
 
-  const [text, onChangeText] = useState("Add a todo");
-
-  const loadTodos = async () => {
-    const data = await getTodos();
-    setTodos(data);
-  };
-  useEffect(() => {
-    loadTodos();
-  }, []);
+const app = () => {
   return (
-    <SafeAreaProvider>
-      <SafeAreaView style={styles.container}>
-        <Text style={styles.header}>ToDO List</Text>
-        <TextInput
-          style={styles.input}
-          onChangeText={onChangeText}
-          value={text}
-        />
-        <FlatList
-          data={todos}
-          renderItem={({ item }) => <Item title={item.title} />}
-          keyExtractor={(item) => item.id}
-          contentContainerStyle={styles.listContent}
-        />
-      </SafeAreaView>
-    </SafeAreaProvider>
+    <View style={styles.container}>
+      <ImageBackground source={icedCoffeeImg} style={styles.image}>
+        <Text style={styles.title}>Coffee Shop</Text>
+        <Link href="/contact" style={{ marginHorizontal: "auto" }} asChild>
+          <Pressable style={styles.button}>
+            <Text style={styles.buttonText}>Contact Us</Text>
+          </Pressable>
+        </Link>
+        <Link href="/menu" style={{ marginHorizontal: "auto" }} asChild>
+          <Pressable style={styles.button}>
+            <Text style={styles.buttonText}>Menu</Text>
+          </Pressable>
+        </Link>
+      </ImageBackground>
+    </View>
   );
-}
+};
+
+export default app;
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: StatusBar.currentHeight || 0,
-  },
-  header: {
-    fontSize: 20,
-    fontWeight: "600",
-    marginTop: 8,
-    alignSelf: "center",
-  },
-  item: {
-    marginBottom: 10,
+    flexDirection: "column",
   },
   title: {
-    fontSize: 28,
-    flexShrink: 1,
+    color: "white",
+    fontSize: 42,
+    fontWeight: "bold",
+    textAlign: "center",
+    backgroundColor: "rgba(0,0,0,0.5)",
+    marginBottom: 120,
   },
-  input: {
-    height: 40,
-    width: "90%",
-    margin: 12,
-    borderWidth: 1,
-    padding: 10,
-    alignSelf: "center",
+  link: {
+    color: "white",
+    fontSize: 42,
+    fontWeight: "bold",
+    textAlign: "center",
+    textDecorationLine: "underline",
+    padding: 4,
+    backgroundColor: "rgba(0,0,0,0.5)",
   },
-  listContent: {
-    width: "100%",
-    paddingHorizontal: 16,
-  },
-  row: {
-    flexDirection: "row",
-    alignItems: "flex-start",
-    justifyContent: "space-between",
-    borderWidth: 1,
+  button: {
+    height: 60,
+    width: 150,
     borderRadius: 20,
-    borderColor: "#ccc",
-    paddingVertical: 14,
-    paddingHorizontal: 16,
+    justifyContent: "center",
+    backgroundColor: "rgba(0,0,0,0.75)",
+    padding: 6,
+    marginBottom: 50,
   },
-  actions: {
-    flexDirection: "row",
+  buttonText: {
+    color: "white",
+    fontSize: 16,
+    fontWeight: "bold",
+    textAlign: "center",
+    padding: 4,
+  },
+  image: {
+    flex: 1,
+    justifyContent: "center",
     alignItems: "center",
-    gap: 16,
-    flexShrink: 0,
+    resizeMode: "cover",
+    width: "100%",
+    height: "100%",
   },
 });
