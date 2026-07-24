@@ -51,6 +51,9 @@ export default function Index() {
     // Haptics notification
     Alert.alert(text);
   };
+  const handleClearAllTodos = () => {
+    clearAllTodos(todos);
+  };
   return (
     <SafeAreaProvider>
       <SafeAreaView style={styles.container}>
@@ -77,6 +80,11 @@ export default function Index() {
           keyExtractor={(item) => item.id}
           contentContainerStyle={styles.listContent}
         />
+        <View>
+          <TouchableOpacity onPress={handleClearAllTodos}>
+            <Ionicons name="trash" size={34} color="#555" paddingTop={14} />
+          </TouchableOpacity>
+        </View>
       </SafeAreaView>
     </SafeAreaProvider>
   );
