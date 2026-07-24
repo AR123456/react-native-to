@@ -6,6 +6,8 @@ import {
   Text,
   StatusBar,
   TextInput,
+  TouchableOpacity,
+  Alert,
 } from "react-native";
 import { SafeAreaView, SafeAreaProvider } from "react-native-safe-area-context";
 import Ionicons from "@expo/vector-icons/Ionicons";
@@ -36,7 +38,9 @@ export default function Index() {
   useEffect(() => {
     loadTodos();
   }, []);
-
+  const handleAddTodo = () => {
+    Alert.alert(text);
+  };
   return (
     <SafeAreaProvider>
       <SafeAreaView style={styles.container}>
@@ -47,7 +51,15 @@ export default function Index() {
             onChangeText={onChangeText}
             value={text}
           />
-          <Ionicons name="add-circle" size={34} color="#555" paddingTop={14} />
+
+          <TouchableOpacity onPress={handleAddTodo}>
+            <Ionicons
+              name="add-circle"
+              size={34}
+              color="#555"
+              paddingTop={14}
+            />
+          </TouchableOpacity>
         </View>
         <FlatList
           data={todos}
