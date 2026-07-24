@@ -39,6 +39,11 @@ export default function Index() {
     loadTodos();
   }, []);
   const handleAddTodo = () => {
+    if (!text) {
+      Alert.alert("Error", "Please enter a todo.");
+      return;
+    }
+    //  need to add the text and an id to local storage
     Alert.alert(text);
   };
   return (
