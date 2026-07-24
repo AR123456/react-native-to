@@ -41,6 +41,7 @@ export const addTodo = async (
   };
   await AsyncStorage.setItem(TODO_KEY, JSON.stringify([newTodo, ...todos]));
   //Returns the completed todo object so the caller can use it
+
   return newTodo;
 };
 
