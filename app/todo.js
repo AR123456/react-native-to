@@ -64,6 +64,7 @@ export const deleteTodo = async (id) => {
   await AsyncStorage.setItem(TODO_KEY, JSON.stringify(filtered));
 };
 // clear meals set fresh each day
+// this works when I call it from index, need to pass in todos
 export const clearAllTodos = async () => {
   await AsyncStorage.removeItem(TODO_KEY);
 };

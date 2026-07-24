@@ -11,7 +11,7 @@ import {
 } from "react-native";
 import { SafeAreaView, SafeAreaProvider } from "react-native-safe-area-context";
 import Ionicons from "@expo/vector-icons/Ionicons";
-import { getTodos, addTodo } from "./todo";
+import { getTodos, addTodo, clearAllTodos } from "./todo";
 
 // Item will be a todo item
 const Item = ({ title }) => (
@@ -44,7 +44,10 @@ export default function Index() {
       return;
     }
     //  need to add the text and an id to local storage call addTodo , what should be passed?
-    addTodo();
+    // this is adding to onto array not re creating,its nesting,  also not showing
+    // addTodo({ todos });
+
+    console.log(todos);
     // Haptics notification
     Alert.alert(text);
   };
