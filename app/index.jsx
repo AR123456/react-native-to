@@ -43,17 +43,12 @@ export default function Index() {
       Alert.alert("Error", "Please enter a todo.");
       return;
     }
-    //  need to add the text and an id to local storage call addTodo , what should be passed?
-    // this is adding to onto array not re creating,its nesting,  also not showing
-    addTodo({ todos });
-
-    console.log(todos);
+    addTodo(todos);
     // Haptics notification
     Alert.alert(text);
   };
   const handleClearAllTodos = () => {
     clearAllTodos(todos);
-    console.log(todos);
   };
   return (
     <SafeAreaProvider>
