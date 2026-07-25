@@ -29,7 +29,7 @@ export default function Index() {
   // getters setters
   const [todos, setTodos] = useState([]);
 
-  const [text, onChangeText] = useState("Add a todo");
+  const [text, onChangeText] = useState("");
 
   const loadTodos = async () => {
     const data = await getTodos();
@@ -61,6 +61,7 @@ export default function Index() {
         <View style={styles.row}>
           <TextInput
             style={styles.input}
+            placeholder="Add a todo"
             onChangeText={onChangeText}
             value={text}
           />
