@@ -38,12 +38,16 @@ export default function Index() {
   useEffect(() => {
     loadTodos();
   }, []);
-  const handleAddTodo = () => {
+  const handleAddTodo = async () => {
     if (!text) {
       Alert.alert("Error", "Please enter a todo.");
       return;
     }
-    addTodo(todos);
+    await addTodo({ title: text });
+    // clear the input
+    onChangeText("");
+    // refresh from local storage list
+    await loadTodos();
     // Haptics notification
     Alert.alert(text);
   };
