@@ -27,14 +27,11 @@ export const getTodos = async () => {
   return data ? JSON.parse(data) : DEFAULT_TODOS;
 };
 // addtodo- create here call elsewhere
-export const addTodo = async (
-  //loads the existing todo array
-  todo,
-) => {
+export const addTodo = async (todoData) => {
   const todos = await getTodos();
   //Builds the new todo object by spreading your input and adding a generated id (current timestamp as a string) and createdAt (ISO date string)
   const newTodo = {
-    ...todo,
+    ...todoData,
     //Saves the updated array back — notice [newTodo, ...todos] puts the new todo first, so the list stays newest-first
     id: Date.now().toString(),
     createdAt: new Date().toISOString(),
