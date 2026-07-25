@@ -29,16 +29,12 @@ export const getTodos = async () => {
 // addtodo- create here call elsewhere
 export const addTodo = async (
   //loads the existing todo array
-  // todo,
-  // try data instead
-  data,
+  todo,
 ) => {
   const todos = await getTodos();
   //Builds the new todo object by spreading your input and adding a generated id (current timestamp as a string) and createdAt (ISO date string)
   const newTodo = {
-    // ...todo,
-    // try data instead
-    ...data,
+    ...todo,
     //Saves the updated array back — notice [newTodo, ...todos] puts the new todo first, so the list stays newest-first
     id: Date.now().toString(),
     createdAt: new Date().toISOString(),
@@ -67,7 +63,8 @@ export const deleteTodo = async (id) => {
   const filtered = todos.filter((todo) => todo.id !== id);
   await AsyncStorage.setItem(TODO_KEY, JSON.stringify(filtered));
 };
-// clear all todos from local
+// clear all todos from
+
 export const clearAllTodos = async () => {
   await AsyncStorage.removeItem(TODO_KEY);
 };
