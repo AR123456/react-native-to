@@ -7,7 +7,7 @@ const TODO_KEY = "todo";
 const DEFAULT_TODOS = [
   {
     id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
-    title: "First Item, coming from default todos",
+    title: "First Item, coming from default todos are these defaults",
   },
   {
     id: "3ac68afc-c605-48d3-a4f8-fbd91aa97f63",
@@ -28,15 +28,15 @@ const getStoredTodos = async () => {
 };
 // fetch whatever's stored, If so, If nothing's(first launch), returns default values array
 export const getTodos = async () => {
-  const data = await AsyncStorage.getItem(TODO_KEY);
-  return data ? JSON.parse(data) : DEFAULT_TODOS;
+  const todos = await getStoredTodos();
+  return todos.length > 0 ? todos : DEFAULT_TODOS;
 };
 // addtodo- create here call elsewhere
-export const addTodo = async (todoData) => {
-  const todos = await getTodos();
+export const addTodo = async (todo) => {
+  const todos = await getStoredTodos();
   //Builds the new todo object by spreading your input and adding a generated id (current timestamp as a string) and createdAt (ISO date string)
   const newTodo = {
-    ...todoData,
+    ...todo,
     //Saves the updated array back — notice [newTodo, ...todos] puts the new todo first, so the list stays newest-first
     id: Date.now().toString(),
     createdAt: new Date().toISOString(),
