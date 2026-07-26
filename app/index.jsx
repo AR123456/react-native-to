@@ -33,6 +33,7 @@ export default function Index() {
 
   const loadTodos = async () => {
     const data = await getTodos();
+    console.log(data);
     setTodos(data);
   };
   useEffect(() => {
@@ -47,12 +48,14 @@ export default function Index() {
     // clear the input
     onChangeText("");
     // refresh from local storage list
+
     await loadTodos();
     // Haptics notification
     Alert.alert(text);
   };
-  const handleClearAllTodos = () => {
+  const handleClearAllTodos = async () => {
     clearAllTodos(todos);
+    await loadTodos();
   };
   return (
     <SafeAreaProvider>
