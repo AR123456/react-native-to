@@ -67,6 +67,8 @@ export default function Index() {
             placeholder="Add a todo"
             onChangeText={onChangeText}
             value={text}
+            onSubmitEditing={handleAddTodo}
+            returnKeyType="done"
           />
 
           <TouchableOpacity onPress={handleAddTodo}>
