@@ -54,7 +54,7 @@ export default function Index() {
     Alert.alert(text);
   };
   const handleClearAllTodos = async () => {
-    clearAllTodos(todos);
+    await clearAllTodos();
     await loadTodos();
   };
   return (
