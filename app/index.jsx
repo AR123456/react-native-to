@@ -32,9 +32,9 @@ export default function Index() {
   const [text, onChangeText] = useState("");
 
   const loadTodos = async () => {
-    const data = await getTodos();
-    console.log(data);
-    setTodos(data);
+    const loadedTodos = await getTodos();
+    console.log(loadedTodos);
+    setTodos(loadedTodos);
   };
   useEffect(() => {
     loadTodos();
