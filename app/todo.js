@@ -21,6 +21,11 @@ const DEFAULT_TODOS = [
 ];
 
 // get todos
+// helper to check if defaults need to be loaded
+const getStoredTodos = async () => {
+  const data = await AsyncStorage.getItem(TODO_KEY);
+  return data ? JSON.parse(data) : [];
+};
 // fetch whatever's stored, If so, If nothing's(first launch), returns default values array
 export const getTodos = async () => {
   const data = await AsyncStorage.getItem(TODO_KEY);
