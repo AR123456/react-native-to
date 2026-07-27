@@ -14,19 +14,14 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 import { getTodos, addTodo, clearAllTodos, editTodo } from "./todo";
 
 // Item will be a todo item
-const Item = ({ title }) => (
+const Item = ({ title, onEdit }) => (
   <View style={styles.item}>
     <View style={styles.row}>
       <Text style={styles.title}>{title}</Text>
-      <View style={styles.actions}>
-        <Ionicons
-          name="pencil"
-          size={24}
-          color="#555"
-          onPress={handleEditTodo}
-        />
-        <Ionicons name="trash-outline" size={22} color="#555" />
-      </View>
+      <TouchableOpacity style={styles.actions}>
+        <Ionicons name="pencil" size={24} color="#555" onPress={onEdit} />
+      </TouchableOpacity>
+      <Ionicons name="trash-outline" size={22} color="#555" />
     </View>
   </View>
 );
