@@ -97,7 +97,9 @@ export default function Index() {
         </View>
         <FlatList
           data={todos}
-          renderItem={({ item }) => <Item title={item.title} />}
+          renderItem={({ item }) => (
+            <Item title={item.title} onEdit={() => handleEditTodo(item.id)} />
+          )}
           keyExtractor={(item) => item.id}
           contentContainerStyle={styles.listContent}
         />
