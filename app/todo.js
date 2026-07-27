@@ -58,7 +58,7 @@ export const editTodo = async (id, updates) => {
   // await AsyncStorage.setItem(TODO_KEY, JSON.stringify(updatedTodos));
   // //returns the updated todo so the caller can use it
   // return updatedTodos.find((todo) => todo.id === id);
-  alert(" in edit function");
+  alert(id);
 };
 
 export const deleteTodo = async (id) => {
