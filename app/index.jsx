@@ -11,7 +11,7 @@ import {
 } from "react-native";
 import { SafeAreaView, SafeAreaProvider } from "react-native-safe-area-context";
 import Ionicons from "@expo/vector-icons/Ionicons";
-import { getTodos, addTodo, clearAllTodos } from "./todo";
+import { getTodos, addTodo, clearAllTodos, editTodo } from "./todo";
 
 // Item will be a todo item
 const Item = ({ title }) => (
@@ -19,7 +19,12 @@ const Item = ({ title }) => (
     <View style={styles.row}>
       <Text style={styles.title}>{title}</Text>
       <View style={styles.actions}>
-        <Ionicons name="pencil" size={24} color="#555" />
+        <Ionicons
+          name="pencil"
+          size={24}
+          color="#555"
+          onPress={handleEditTodo}
+        />
         <Ionicons name="trash-outline" size={22} color="#555" />
       </View>
     </View>
@@ -52,6 +57,21 @@ export default function Index() {
     await loadTodos();
     // Haptics notification
     Alert.alert(text);
+  };
+  const handleEditTodo = async () => {
+    // if (!text) {
+    //   Alert.alert("Error", "Please enter a todo.");
+    //   return;
+    // }
+    // await editTodo({ title: text });
+    // // clear the input
+    // onChangeText("");
+    // // refresh from local storage list
+
+    // await loadTodos();
+    // // Haptics notification
+    // Alert.alert(text);
+    editTodo();
   };
   const handleClearAllTodos = async () => {
     await clearAllTodos();
@@ -87,7 +107,7 @@ export default function Index() {
           contentContainerStyle={styles.listContent}
         />
         <View>
-          <Text style={styles.header}>Nuclear option all todos done!</Text>
+          <Text style={styles.header}>Nuclear option done all todos!</Text>
           <TouchableOpacity style={styles.header} onPress={handleClearAllTodos}>
             <Ionicons name="trash" size={34} color="#f30909" paddingTop={14} />
           </TouchableOpacity>
