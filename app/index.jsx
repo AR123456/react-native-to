@@ -86,9 +86,9 @@ export default function Index() {
           keyExtractor={(item) => item.id}
           contentContainerStyle={styles.listContent}
         />
-        <View style={styles.row}>
-          <Text>Nuclear option all todos done!</Text>
-          <TouchableOpacity onPress={handleClearAllTodos}>
+        <View>
+          <Text style={styles.header}>Nuclear option all todos done!</Text>
+          <TouchableOpacity style={styles.header} onPress={handleClearAllTodos}>
             <Ionicons name="trash" size={34} color="#f30909" paddingTop={14} />
           </TouchableOpacity>
         </View>
