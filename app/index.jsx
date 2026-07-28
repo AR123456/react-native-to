@@ -60,6 +60,12 @@ export default function Index() {
     setEditingId(id);
     onChangeText(currentTitle);
   };
+  const handleSubmit = async () => {
+    if (!text) {
+      Alert.alert("Error", "Please enter a todo.");
+      return;
+    }
+  };
   const handleClearAllTodos = async () => {
     await clearAllTodos();
     await loadTodos();
