@@ -20,8 +20,8 @@ const Item = ({ title, onEdit }) => (
       <Text style={styles.title}>{title}</Text>
       <TouchableOpacity style={styles.actions}>
         <Ionicons name="pencil" size={24} color="#555" onPress={onEdit} />
+        <Ionicons name="trash-outline" size={22} color="#555" />
       </TouchableOpacity>
-      <Ionicons name="trash-outline" size={22} color="#555" />
     </View>
   </View>
 );
@@ -33,7 +33,7 @@ export default function Index() {
 
   const loadTodos = async () => {
     const loadedTodos = await getTodos();
-    console.log(loadedTodos);
+    console.log(loadedTodos, "loaded todos");
     setTodos(loadedTodos);
   };
   useEffect(() => {
