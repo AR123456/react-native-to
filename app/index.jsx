@@ -56,19 +56,9 @@ export default function Index() {
     Alert.alert(text);
   };
   const handleEditTodo = async (id, currentTitle) => {
-    // if (!text) {
-    //   Alert.alert("Error", "Please enter a todo.");
-    //   return;
-    // }
-    // await editTodo({ title: text });
-    // // clear the input
-    // onChangeText("");
-    // // refresh from local storage list
-
-    // await loadTodos();
-    // // Haptics notification
-    // Alert.alert(text);
-    editTodo(id);
+    // put the title being edited into the text input
+    setEditingId(id);
+    onChangeText(currentTitle);
   };
   const handleClearAllTodos = async () => {
     await clearAllTodos();
