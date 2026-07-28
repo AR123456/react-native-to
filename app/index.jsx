@@ -53,7 +53,7 @@ export default function Index() {
     // Haptics notification
     Alert.alert(text);
   };
-  const handleEditTodo = async () => {
+  const handleEditTodo = async (id) => {
     // if (!text) {
     //   Alert.alert("Error", "Please enter a todo.");
     //   return;
@@ -66,7 +66,7 @@ export default function Index() {
     // await loadTodos();
     // // Haptics notification
     // Alert.alert(text);
-    editTodo();
+    editTodo(id);
   };
   const handleClearAllTodos = async () => {
     await clearAllTodos();
