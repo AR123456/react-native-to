@@ -30,6 +30,8 @@ export default function Index() {
   const [todos, setTodos] = useState([]);
 
   const [text, onChangeText] = useState("");
+  // getter setter for editing the todo
+  const [editingId, setEditingId] = useState(null);
 
   const loadTodos = async () => {
     const loadedTodos = await getTodos();
@@ -53,7 +55,7 @@ export default function Index() {
     // Haptics notification
     Alert.alert(text);
   };
-  const handleEditTodo = async (id) => {
+  const handleEditTodo = async (id, currentTitle) => {
     // if (!text) {
     //   Alert.alert("Error", "Please enter a todo.");
     //   return;
