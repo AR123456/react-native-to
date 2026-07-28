@@ -65,6 +65,12 @@ export default function Index() {
       Alert.alert("Error", "Please enter a todo.");
       return;
     }
+    if (editingId) {
+      await editTodo(editingId, { title: text });
+      setEditingId(null);
+    } else {
+      await addTodo({ title: text });
+    }
   };
   const handleClearAllTodos = async () => {
     await clearAllTodos();
