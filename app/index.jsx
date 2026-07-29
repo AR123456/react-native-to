@@ -94,10 +94,9 @@ export default function Index() {
 
           <TouchableOpacity onPress={handleSubmit}>
             <Ionicons
-              name="add-circle"
+              name={editingId ? "checkmark-circle" : "add-circle"}
               size={34}
               color="#555"
-              paddingTop={14}
             />
           </TouchableOpacity>
         </View>
