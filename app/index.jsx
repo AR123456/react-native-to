@@ -1,166 +1,94 @@
-import { useState, useEffect } from "react";
-import {
-  View,
-  FlatList,
-  StyleSheet,
-  Text,
-  StatusBar,
-  TextInput,
-  TouchableOpacity,
-  Alert,
-} from "react-native";
-import { SafeAreaView, SafeAreaProvider } from "react-native-safe-area-context";
-import Ionicons from "@expo/vector-icons/Ionicons";
-import { getTodos, addTodo, clearAllTodos, editTodo } from "./todo";
-
-// Item will be a todo item
-const Item = ({ title, onEdit }) => (
-  <View style={styles.item}>
-    <View style={styles.row}>
-      <Text style={styles.title}>{title}</Text>
-      <TouchableOpacity style={styles.actions}>
-        <Ionicons name="pencil" size={24} color="#555" onPress={onEdit} />
-        <Ionicons name="trash-outline" size={22} color="#555" />
-      </TouchableOpacity>
-    </View>
-  </View>
-);
+import { Text, View, TextInput, Pressable, StyleSheet } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { useState } from "react";
+// test data
+import { data } from "@/data/todos";
 export default function Index() {
-  // getters setters
-  const [todos, setTodos] = useState([]);
-
-  const [text, onChangeText] = useState("");
-  // getter setter for editing the todo
-  const [editingId, setEditingId] = useState(null);
-
-  const loadTodos = async () => {
-    const loadedTodos = await getTodos();
-    console.log(loadedTodos, "loaded todos");
-    setTodos(loadedTodos);
-  };
-  useEffect(() => {
-    loadTodos();
-  }, []);
-  const handleAddTodo = async () => {
-    if (!text) {
-      Alert.alert("Error", "Please enter a todo.");
-      return;
-    }
-    await addTodo({ title: text });
-    // clear the input
-    onChangeText("");
-    // refresh from local storage list
-
-    await loadTodos();
-    // Haptics notification
-    Alert.alert(text);
-  };
-  const handleEditTodo = async (id, currentTitle) => {
-    // put the title being edited into the text input
-    setEditingId(id);
-    onChangeText(currentTitle);
-  };
-  const handleSubmit = async () => {
-    if (!text) {
-      Alert.alert("Error", "Please enter a todo.");
-      return;
-    }
-    if (editingId) {
-      await editTodo(editingId, { title: text });
-      setEditingId(null);
-    } else {
-      await addTodo({ title: text });
+  // getters setters  - sort data so newest todo is first/top on list
+  const [todos, setTodos] = useState(data.sort((a, b) => b.id - a.id));
+  // text input
+  const [text, setText] = useState("");
+  const addTodo = () => {
+    //remove extra spaces
+    if (text.trim()) {
+      // create id for new   - take first todo it array that has the highest number and add 1 to it, it no todos then the number is 1
+      const newId = todos.length > 0 ? todos[0].id + 1 : 1;
+      // create this todo object then spread in the rest
+      setTodos([{ id: newId, title: text, completed: false }, ...todos]);
+      // set text in input back to null
+      setText("");
     }
   };
-  const handleClearAllTodos = async () => {
-    await clearAllTodos();
-    await loadTodos();
+  // read flat list
+
+  // toggle complete or not
+  const toggleTodo = (id) => {
+    setTodos(
+      todos.map((todo) =>
+        todo.id === id ? { ...todo, completed: !todo.completed } : todo,
+      ),
+    );
+  };
+  // delete todo
+  const removeTodo = (id) => {
+    setTodos(todos.filter((todo) => todo.id !== id));
   };
   return (
-    <SafeAreaProvider>
-      <SafeAreaView style={styles.container}>
-        <Text style={styles.header}>ToDO List</Text>
-        <View style={styles.row}>
-          <TextInput
-            style={styles.input}
-            placeholder="Add a todo"
-            onChangeText={onChangeText}
-            value={text}
-            onSubmitEditing={handleAddTodo}
-            returnKeyType="done"
-          />
-
-          <TouchableOpacity onPress={handleAddTodo}>
-            <Ionicons
-              name="add-circle"
-              size={34}
-              color="#555"
-              paddingTop={14}
-            />
-          </TouchableOpacity>
-        </View>
-        <FlatList
-          data={todos}
-          renderItem={({ item }) => (
-            <Item title={item.title} onEdit={() => handleEditTodo(item.id)} />
-          )}
-          keyExtractor={(item) => item.id}
-          contentContainerStyle={styles.listContent}
+    <SafeAreaView style={styles.container}>
+      <View style={styles.inputContainer}>
+        <TextInput
+          style={styles.input}
+          placeholder="Add a new todo"
+          placeholderTextColor="gray"
+          value={text}
+          onChangeText={setText}
         />
-        <View>
-          <Text style={styles.header}>Nuclear option done all todos!</Text>
-          <TouchableOpacity style={styles.header} onPress={handleClearAllTodos}>
-            <Ionicons name="trash" size={34} color="#f30909" paddingTop={14} />
-          </TouchableOpacity>
-        </View>
-      </SafeAreaView>
-    </SafeAreaProvider>
+        <Pressable onPress={addTodo} style={styles.addButton}>
+          <Text style={styles.addButtonText}>Add todo</Text>
+        </Pressable>
+      </View>
+      {/* flat list here */}
+    </SafeAreaView>
   );
 }
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: StatusBar.currentHeight || 0,
+    backgroundColor: "black",
   },
-  header: {
-    fontSize: 20,
-    fontWeight: "600",
-    marginTop: 8,
-    alignSelf: "center",
-  },
-  item: {
-    marginBottom: 10,
-  },
-  title: {
-    fontSize: 28,
-    flexShrink: 1,
-  },
-  input: {
-    height: 40,
-    width: "85%",
-    margin: 12,
-    borderWidth: 1,
-    padding: 10,
-    alignSelf: "center",
-  },
-  listContent: {
-    width: "100%",
-    paddingHorizontal: 16,
-  },
-  row: {
-    flexDirection: "row",
-    alignItems: "flex-start",
-    justifyContent: "space-between",
-    borderWidth: 1,
-    borderRadius: 20,
-    borderColor: "#ccc",
-    paddingVertical: 14,
-    paddingHorizontal: 16,
-  },
-  actions: {
+  inputContainer: {
     flexDirection: "row",
     alignItems: "center",
-    gap: 16,
-    flexShrink: 0,
+    marginBottom: 10,
+    padding: 10,
+    width: "100%",
+    maxWidth: 1024,
+    marginHorizontal: "auto",
+    pointerEvents: "auto",
   },
+  input: {
+    flex: 1,
+    borderColor: "gray",
+    borderWidth: 1,
+    borderRadius: 5,
+    padding: 10,
+    marginRight: 10,
+    fontSize: 18,
+    minWidth: 0,
+    color: "white",
+  },
+  addButton: {
+    backgroundColor: "white",
+    borderRadius: 5,
+    padding: 10,
+  },
+  addButtonText: {
+    fontSize: 18,
+    color: "black",
+  },
+  // for flat list of items
+  todoItem: {},
+  todoText: {},
+  completedText: {},
 });
