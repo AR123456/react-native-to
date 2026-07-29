@@ -60,6 +60,7 @@ export default function Index() {
     setEditingId(id);
     onChangeText(currentTitle);
   };
+  //  handle add or edit
   const handleSubmit = async () => {
     if (!text) {
       Alert.alert("Error", "Please enter a todo.");
@@ -103,7 +104,10 @@ export default function Index() {
         <FlatList
           data={todos}
           renderItem={({ item }) => (
-            <Item title={item.title} onEdit={() => handleEditTodo(item.id)} />
+            <Item
+              title={item.title}
+              onEdit={() => handleEditTodo(item.id, item.title)}
+            />
           )}
           keyExtractor={(item) => item.id}
           contentContainerStyle={styles.listContent}
