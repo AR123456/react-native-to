@@ -42,11 +42,6 @@ export default function Index() {
     loadTodos();
   }, []);
 
-  const handleEditTodo = async (id, currentTitle) => {
-    // put the title being edited into the text input
-    setEditingId(id);
-    onChangeText(currentTitle);
-  };
   //  handle add or edit
   const handleSubmit = async () => {
     if (!text) {
@@ -61,6 +56,16 @@ export default function Index() {
     }
     onChangeText("");
     await loadTodos();
+  };
+  const handleEditTodo = async (id, currentTitle) => {
+    // put the title being edited into the text input
+    setEditingId(id);
+    onChangeText(currentTitle);
+  };
+  //in case user wants to cancel the edit
+  const handleCancelEdit = () => {
+    setEditingId(null);
+    onChangeText("");
   };
   const handleClearAllTodos = async () => {
     await clearAllTodos();
@@ -80,6 +85,11 @@ export default function Index() {
             returnKeyType="done"
           />
 
+          {editingId && (
+            <TouchableOpacity onPress={handleCancelEdit}>
+              <Ionicons name="close-circle" size={34} color="#999" />
+            </TouchableOpacity>
+          )}
           <TouchableOpacity onPress={handleSubmit}>
             <Ionicons
               name={editingId ? "checkmark-circle" : "add-circle"}
