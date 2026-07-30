@@ -48,17 +48,16 @@ export const addTodo = async (todo) => {
 };
 
 export const editTodo = async (id, updates) => {
-  // //loads the existing todo array
-  // const todos = await getTodos();
-  // //finds the todo and merges in the updates, leaving everything else untouched
-  // const updatedTodos = todos.map((todo) =>
-  //   todo.id === id ? { ...todo, ...updates } : todo,
-  // );
-  // //saves the updated array back
-  // await AsyncStorage.setItem(TODO_KEY, JSON.stringify(updatedTodos));
-  // //returns the updated todo so the caller can use it
-  // return updatedTodos.find((todo) => todo.id === id);
-  alert(id);
+  //loads the existing todo array
+  const todos = await getTodos();
+  //finds the todo and merges in the updates, leaving everything else untouched
+  const updatedTodos = todos.map((todo) =>
+    todo.id === id ? { ...todo, ...updates } : todo,
+  );
+  //saves the updated array back
+  await AsyncStorage.setItem(TODO_KEY, JSON.stringify(updatedTodos));
+  //returns the updated todo so the caller can use it
+  return updatedTodos.find((todo) => todo.id === id);
 };
 
 export const deleteTodo = async (id) => {
