@@ -35,7 +35,7 @@ export default function Index() {
 
   const loadTodos = async () => {
     const loadedTodos = await getTodos();
-    console.log(loadedTodos, "loaded todos");
+    // console.log(loadedTodos, "loaded todos");
     setTodos(loadedTodos);
   };
   useEffect(() => {
