@@ -41,20 +41,7 @@ export default function Index() {
   useEffect(() => {
     loadTodos();
   }, []);
-  const handleAddTodo = async () => {
-    if (!text) {
-      Alert.alert("Error", "Please enter a todo.");
-      return;
-    }
-    await addTodo({ title: text });
-    // clear the input
-    onChangeText("");
-    // refresh from local storage list
 
-    await loadTodos();
-    // Haptics notification
-    Alert.alert(text);
-  };
   const handleEditTodo = async (id, currentTitle) => {
     // put the title being edited into the text input
     setEditingId(id);
