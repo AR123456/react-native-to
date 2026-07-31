@@ -63,6 +63,8 @@ export default function Index() {
     // put the title being edited into the text input
     setEditingId(id);
     onChangeText(currentTitle);
+    // "if the input is mounted, grab focus on it" — safely, without crashing if it somehow isn't ready yet.
+    inputRef.current?.focus();
   };
   //in case user wants to cancel the edit
   const handleCancelEdit = () => {
@@ -79,6 +81,7 @@ export default function Index() {
         <Text style={styles.header}>ToDO List</Text>
         <View style={styles.row}>
           <TextInput
+            ref={inputRef}
             style={styles.input}
             placeholder="Add a todo"
             onChangeText={onChangeText}
