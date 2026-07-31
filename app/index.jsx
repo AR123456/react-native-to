@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import {
   View,
   FlatList,
@@ -32,6 +32,8 @@ export default function Index() {
   const [text, onChangeText] = useState("");
   // getter setter for editing the todo
   const [editingId, setEditingId] = useState(null);
+
+  const inputRef = useRef(null);
 
   const loadTodos = async () => {
     const loadedTodos = await getTodos();
@@ -151,7 +153,6 @@ const styles = StyleSheet.create({
   },
   row: {
     flexDirection: "row",
-    // alignItems: "flex-start",
     alignItems: "center",
     justifyContent: "space-between",
     borderWidth: 1,
