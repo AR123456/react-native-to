@@ -80,15 +80,18 @@ export default function Index() {
       <SafeAreaView style={styles.container}>
         <Text style={styles.header}>ToDO List</Text>
         <View style={styles.row}>
-          <TextInput
-            ref={inputRef}
-            style={[styles.input, editingId && styles.inputEditing]}
-            placeholder="Add a todo"
-            onChangeText={onChangeText}
-            value={text}
-            onSubmitEditing={handleSubmit}
-            returnKeyType="done"
-          />
+          {/* wrapper for input border */}
+          <View>
+            <TextInput
+              ref={inputRef}
+              style={[styles.input, editingId && styles.inputEditing]}
+              placeholder="Add a todo"
+              onChangeText={onChangeText}
+              value={text}
+              onSubmitEditing={handleSubmit}
+              returnKeyType="done"
+            />
+          </View>
 
           {editingId && (
             <TouchableOpacity onPress={handleCancelEdit}>
@@ -169,5 +172,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
     gap: 16,
     flexShrink: 0,
+  },
+  inputEditing: {
+    borderColor: "#555",
+    borderWidth: 2,
   },
 });
