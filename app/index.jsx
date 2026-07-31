@@ -82,7 +82,7 @@ export default function Index() {
         <View style={styles.row}>
           <TextInput
             ref={inputRef}
-            style={styles.input}
+            style={[styles.input, editingId && styles.inputEditing]}
             placeholder="Add a todo"
             onChangeText={onChangeText}
             value={text}
