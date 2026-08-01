@@ -1,190 +1,80 @@
-import { useState, useEffect, useRef } from "react";
 import {
   View,
-  FlatList,
-  StyleSheet,
   Text,
-  StatusBar,
-  TextInput,
-  TouchableOpacity,
-  Alert,
+  StyleSheet,
+  ImageBackground,
+  Pressable,
 } from "react-native";
-import { SafeAreaView, SafeAreaProvider } from "react-native-safe-area-context";
-import Ionicons from "@expo/vector-icons/Ionicons";
-import { getTodos, addTodo, clearAllTodos, editTodo } from "./todo";
+import { Link } from "expo-router";
 
-// Item will be a todo item
-const Item = ({ title, onEdit }) => (
-  <View style={styles.item}>
-    <View style={styles.row}>
-      <Text style={styles.title}>{title}</Text>
-      <TouchableOpacity style={styles.actions}>
-        <Ionicons name="pencil" size={24} color="#555" onPress={onEdit} />
-        <Ionicons name="trash-outline" size={22} color="#555" />
-      </TouchableOpacity>
-    </View>
-  </View>
-);
-export default function Index() {
-  // getters setters
-  const [todos, setTodos] = useState([]);
+import icedCoffeeImg from "@/assets/images/iced-coffee.png";
 
-  const [text, onChangeText] = useState("");
-  // getter setter for editing the todo
-  const [editingId, setEditingId] = useState(null);
-
-  const inputRef = useRef(null);
-
-  const loadTodos = async () => {
-    const loadedTodos = await getTodos();
-    // console.log(loadedTodos, "loaded todos");
-    setTodos(loadedTodos);
-  };
-  useEffect(() => {
-    loadTodos();
-  }, []);
-
-  //  handle add or edit
-  const handleSubmit = async () => {
-    if (!text) {
-      Alert.alert("Error", "Please enter a todo.");
-      return;
-    }
-    if (editingId) {
-      await editTodo(editingId, { title: text });
-      setEditingId(null);
-    } else {
-      await addTodo({ title: text });
-    }
-    onChangeText("");
-    await loadTodos();
-  };
-  const handleEditTodo = async (id, currentTitle) => {
-    // put the title being edited into the text input
-    setEditingId(id);
-    onChangeText(currentTitle);
-    // "if the input is mounted, grab focus on it" — safely, without crashing if it somehow isn't ready yet.
-    inputRef.current?.focus();
-  };
-  //in case user wants to cancel the edit
-  const handleCancelEdit = () => {
-    setEditingId(null);
-    onChangeText("");
-  };
-  const handleClearAllTodos = async () => {
-    await clearAllTodos();
-    await loadTodos();
-  };
+const app = () => {
   return (
-    <SafeAreaProvider>
-      <SafeAreaView style={styles.container}>
-        <Text style={styles.header}>ToDO List</Text>
-        <View style={styles.row}>
-          {/* wrapper for input border */}
-          <View
-            style={[
-              styles.inputWrapper,
-              editingId && styles.inputWrapperEditing,
-            ]}
-          >
-            <TextInput
-              ref={inputRef}
-              style={styles.input}
-              placeholder="Add a todo"
-              onChangeText={onChangeText}
-              value={text}
-              onSubmitEditing={handleSubmit}
-              returnKeyType="done"
-              underlineColorAndroid="transparent"
-            />
-          </View>
-
-          {editingId && (
-            <TouchableOpacity onPress={handleCancelEdit}>
-              <Ionicons name="close-circle" size={34} color="#999" />
-            </TouchableOpacity>
-          )}
-          <TouchableOpacity onPress={handleSubmit}>
-            <Ionicons
-              name={editingId ? "checkmark-circle" : "add-circle"}
-              size={34}
-              color="#555"
-            />
-          </TouchableOpacity>
-        </View>
-        <FlatList
-          data={todos}
-          renderItem={({ item }) => (
-            <Item
-              title={item.title}
-              onEdit={() => handleEditTodo(item.id, item.title)}
-            />
-          )}
-          keyExtractor={(item) => item.id}
-          contentContainerStyle={styles.listContent}
-        />
-        <View>
-          <Text style={styles.header}>Nuclear option done all todos!</Text>
-          <TouchableOpacity style={styles.header} onPress={handleClearAllTodos}>
-            <Ionicons name="trash" size={34} color="#f30909" paddingTop={14} />
-          </TouchableOpacity>
-        </View>
-      </SafeAreaView>
-    </SafeAreaProvider>
+    <View style={styles.container}>
+      <ImageBackground source={icedCoffeeImg} style={styles.image}>
+        <Text style={styles.title}>Coffee Shop</Text>
+        <Link href="/contact" style={{ marginHorizontal: "auto" }} asChild>
+          <Pressable style={styles.button}>
+            <Text style={styles.buttonText}>Contact Us</Text>
+          </Pressable>
+        </Link>
+        <Link href="/menu" style={{ marginHorizontal: "auto" }} asChild>
+          <Pressable style={styles.button}>
+            <Text style={styles.buttonText}>Menu</Text>
+          </Pressable>
+        </Link>
+      </ImageBackground>
+    </View>
   );
-}
+};
+
+export default app;
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: StatusBar.currentHeight || 0,
-  },
-  header: {
-    fontSize: 20,
-    fontWeight: "600",
-    marginTop: 8,
-    alignSelf: "center",
-  },
-  item: {
-    marginBottom: 10,
+    flexDirection: "column",
   },
   title: {
-    fontSize: 28,
-    flexShrink: 1,
+    color: "white",
+    fontSize: 42,
+    fontWeight: "bold",
+    textAlign: "center",
+    backgroundColor: "rgba(0,0,0,0.5)",
+    marginBottom: 120,
   },
-
-  listContent: {
-    width: "100%",
-    paddingHorizontal: 16,
+  link: {
+    color: "white",
+    fontSize: 42,
+    fontWeight: "bold",
+    textAlign: "center",
+    textDecorationLine: "underline",
+    padding: 4,
+    backgroundColor: "rgba(0,0,0,0.5)",
   },
-  row: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    borderWidth: 1,
+  button: {
+    height: 60,
+    width: 150,
     borderRadius: 20,
-    borderColor: "#ccc",
-    paddingVertical: 14,
-    paddingHorizontal: 16,
+    justifyContent: "center",
+    backgroundColor: "rgba(0,0,0,0.75)",
+    padding: 6,
+    marginBottom: 50,
   },
-  actions: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 16,
-    flexShrink: 0,
+  buttonText: {
+    color: "white",
+    fontSize: 16,
+    fontWeight: "bold",
+    textAlign: "center",
+    padding: 4,
   },
-
-  inputWrapper: {
+  image: {
     flex: 1,
-    marginHorizontal: 8,
-    borderWidth: 1,
-    borderColor: "#ccc",
-  },
-  inputWrapperEditing: {
-    borderColor: "red",
-    borderWidth: 2,
-  },
-  input: {
-    height: 40,
-    padding: 10,
+    justifyContent: "center",
+    alignItems: "center",
+    resizeMode: "cover",
+    width: "100%",
+    height: "100%",
   },
 });
