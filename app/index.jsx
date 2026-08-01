@@ -89,12 +89,13 @@ export default function Index() {
           >
             <TextInput
               ref={inputRef}
-              style={[styles.input, editingId && styles.inputEditing]}
+              style={styles.input}
               placeholder="Add a todo"
               onChangeText={onChangeText}
               value={text}
               onSubmitEditing={handleSubmit}
               returnKeyType="done"
+              underlineColorAndroid="transparent"
             />
           </View>
 
