@@ -172,16 +172,12 @@ const styles = StyleSheet.create({
     gap: 16,
     flexShrink: 0,
   },
-  inputEditing: {
-    borderColor: "green",
-    borderWidth: 2,
-  },
+
   inputWrapper: {
-    width: "85%",
-    margin: 12,
+    flex: 1,
+    marginHorizontal: 8,
     borderWidth: 1,
     borderColor: "#ccc",
-    alignSelf: "center",
   },
   inputWrapperEditing: {
     borderColor: "red",
