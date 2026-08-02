@@ -11,7 +11,7 @@ import {
 } from "react-native";
 import { SafeAreaView, SafeAreaProvider } from "react-native-safe-area-context";
 import Ionicons from "@expo/vector-icons/Ionicons";
-import { getTodos, addTodo, clearAllTodos, editTodo } from "./todo";
+import { getTodos, addTodo, clearAllTodos, editTodo, deleteTodo } from "./todo";
 
 // Item will be a todo item
 const Item = ({ title, onEdit }) => (
@@ -20,7 +20,12 @@ const Item = ({ title, onEdit }) => (
       <Text style={styles.title}>{title}</Text>
       <TouchableOpacity style={styles.actions}>
         <Ionicons name="pencil" size={24} color="#555" onPress={onEdit} />
-        <Ionicons name="trash-outline" size={22} color="#555" />
+        <Ionicons
+          name="trash-outline"
+          size={22}
+          color="#555"
+          opPress={handleDeleteTodo}
+        />
       </TouchableOpacity>
     </View>
   </View>
@@ -75,7 +80,10 @@ export default function Index() {
     await clearAllTodos();
     await loadTodos();
   };
-
+  const handleDeleteTodo = async (id) => {
+    await deleteTodo();
+    await loadTodos();
+  };
   return (
     <SafeAreaProvider>
       <SafeAreaView style={styles.container}>
