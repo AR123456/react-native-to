@@ -24,7 +24,7 @@ const Item = ({ title, onEdit, onDelete }) => (
           name="trash-outline"
           size={22}
           color="#555"
-          opPress={onDelete}
+          onPress={onDelete}
         />
       </TouchableOpacity>
     </View>
@@ -81,7 +81,7 @@ export default function Index() {
     await loadTodos();
   };
   const handleDeleteTodo = async (id) => {
-    await deleteTodo();
+    await deleteTodo(id);
     await loadTodos();
   };
   return (
