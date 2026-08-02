@@ -151,7 +151,7 @@ const styles = StyleSheet.create({
   header: {
     fontSize: 20,
     fontWeight: "600",
-    marginTop: 8,
+    marginTop: 28,
     alignSelf: "center",
   },
   item: {
