@@ -14,7 +14,7 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 import { getTodos, addTodo, clearAllTodos, editTodo, deleteTodo } from "./todo";
 
 // Item will be a todo item
-const Item = ({ title, onEdit }) => (
+const Item = ({ title, onEdit, onDelete }) => (
   <View style={styles.item}>
     <View style={styles.row}>
       <Text style={styles.title}>{title}</Text>
@@ -24,7 +24,7 @@ const Item = ({ title, onEdit }) => (
           name="trash-outline"
           size={22}
           color="#555"
-          opPress={handleDeleteTodo}
+          opPress={onDelete}
         />
       </TouchableOpacity>
     </View>
@@ -127,6 +127,7 @@ export default function Index() {
             <Item
               title={item.title}
               onEdit={() => handleEditTodo(item.id, item.title)}
+              onDelete={() => handleDeleteTodo(item.id)}
             />
           )}
           keyExtractor={(item) => item.id}
