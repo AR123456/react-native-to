@@ -66,7 +66,6 @@ export const deleteTodo = async (id) => {
   await AsyncStorage.setItem(TODO_KEY, JSON.stringify(filtered));
 };
 // clear all todos from
-
 export const clearAllTodos = async () => {
   await AsyncStorage.removeItem(TODO_KEY);
 };

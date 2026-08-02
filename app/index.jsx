@@ -75,6 +75,7 @@ export default function Index() {
     await clearAllTodos();
     await loadTodos();
   };
+
   return (
     <SafeAreaProvider>
       <SafeAreaView style={styles.container}>
@@ -178,13 +179,18 @@ const styles = StyleSheet.create({
     marginHorizontal: 8,
     borderWidth: 1,
     borderColor: "#ccc",
+    borderRadius: 25,
   },
   inputWrapperEditing: {
     borderColor: "red",
     borderWidth: 2,
+    borderRadius: 25,
   },
   input: {
     height: 40,
     padding: 10,
+    // removing the extra border in web view
+    borderWidth: 0,
+    outlineStyle: "none",
   },
 });
