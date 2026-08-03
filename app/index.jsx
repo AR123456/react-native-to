@@ -18,24 +18,25 @@ import {
   editTodo,
   deleteTodo,
 } from "../lib/todo";
+import Item from "../components/Item";
 
 // Item will be a todo item
-const Item = ({ title, onEdit, onDelete }) => (
-  <View style={styles.item}>
-    <View style={styles.row}>
-      <Text style={styles.title}>{title}</Text>
-      <TouchableOpacity style={styles.actions}>
-        <Ionicons name="pencil" size={24} color="#555" onPress={onEdit} />
-        <Ionicons
-          name="trash-outline"
-          size={22}
-          color="#555"
-          onPress={onDelete}
-        />
-      </TouchableOpacity>
-    </View>
-  </View>
-);
+// const Item = ({ title, onEdit, onDelete }) => (
+//   <View style={styles.item}>
+//     <View style={styles.row}>
+//       <Text style={styles.title}>{title}</Text>
+//       <TouchableOpacity style={styles.actions}>
+//         <Ionicons name="pencil" size={24} color="#555" onPress={onEdit} />
+//         <Ionicons
+//           name="trash-outline"
+//           size={22}
+//           color="#555"
+//           onPress={onDelete}
+//         />
+//       </TouchableOpacity>
+//     </View>
+//   </View>
+// );
 export default function Index() {
   // getters setters
   const [todos, setTodos] = useState([]);
