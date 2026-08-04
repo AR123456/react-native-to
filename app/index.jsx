@@ -77,7 +77,7 @@ export default function Index() {
   return (
     <SafeAreaProvider>
       <SafeAreaView style={styles.container}>
-        <Text style={styles.header}>ToDO List</Text>
+        <Text style={styles.header}>ToDo List</Text>
         <View style={styles.row}>
           {/* wrapper for input border */}
           <View
