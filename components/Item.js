@@ -23,4 +23,28 @@ const Item = ({ title, onEdit, onDelete }) => {
 
 export default Item;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  item: {
+    marginBottom: 10,
+  },
+  title: {
+    // fontSize: 28,
+    flexShrink: 1,
+  },
+  row: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    borderWidth: 1,
+    borderRadius: 20,
+    borderColor: "#ccc",
+    paddingVertical: 14,
+    paddingHorizontal: 16,
+  },
+  actions: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 16,
+    flexShrink: 0,
+  },
+});
